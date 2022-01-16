@@ -1,4 +1,7 @@
 ---
+# Define MongoDB version to install
+mongodb_version: 4.2
+
 # defaults file for ansible-mongodb
 mongodb_admin_user:
   name: admin
@@ -16,17 +19,17 @@ mongodb_apt_repo_ubuntu: "{{ 'deb https://repo.mongodb.org/apt/' + ansible_distr
 # Ensure to change from default (127.0.0.1) if setting up replication
 mongodb_bind_ip:
   # - 0.0.0.0
-  - 127.0.0.1
-  # - "{{ ansible_enp0s8['ipv4']['address'] }}"
+  # - 127.0.0.1
+  - "{{ ansible_enp0s3['ipv4']['address'] }}"
 
 # Defines the path to the MongoDB configuration file
 mongodb_config: /etc/mongod.conf
 
 # Defines if MongoDB should be configured
-mongodb_config_mongodb: false
+mongodb_config_mongodb: true
 
 # Defines if MongoDB users should be created.
-mongodb_create_users: false
+mongodb_create_users: true
 
 mongodb_gpg_key: "{{ 'https://www.mongodb.org/static/pgp/server-'+mongodb_version|string+'.asc' }}"
 
@@ -69,5 +72,5 @@ mongodb_users:
       # - readWriteAnyDatabase
     state: present
 
-# Define MongoDB version to install
-mongodb_version: 4.2
+# Enable or disable Role-Based Access Control (RBAC) to govern each user’s access to database resources and operations.
+mongodb_auth: enabled

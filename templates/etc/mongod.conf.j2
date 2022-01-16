@@ -30,11 +30,11 @@ processManagement:
 {% if mongodb_replication %}
 replication:
   replSetName: {{ mongodb_replication_set }}
+{% endif %}
 
 security:
-  authorization: disabled
+  authorization: {{ mongodb_auth }}
 #  keyFile: {{ mongodb_replication_keyfile }}
-{% endif %}
 
 #operationProfiling:
 
